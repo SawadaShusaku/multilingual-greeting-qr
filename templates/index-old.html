@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QR Code</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            margin-bottom: 20px;
+        }
+        #greeting {
+            font-size: 2rem;
+            color: #333;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>QR Code for Greeting Page</h1>
+        <p>Scan this QR code with your smartphone to see a greeting.</p>
+        <img src="data:image/png;base64,{{ img_data }}" alt="QR Code">
+        <h2 id="greeting">Waiting for scan...</h2>
+    </div>
+    
+    <script>
+        function updateGreeting() {
+            $.getJSON('/update_language/{{ unique_id }}', function(data) {
+                $('#greeting').text(data.greeting);
+            });
+        }
+        
+        /* #JavaScriptの実装の場合
+        function updateGreeting() {
+            fetch('/update_language/{{ unique_id }}')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('greeting').textContent = data.greeting;
+                })
+                .catch(error => console.error('Error:', error));
+        }
+        */
+       
+        // 5秒ごとに更新
+        setInterval(updateGreeting, 5000);
+    </script>
+</body>
+</html>
