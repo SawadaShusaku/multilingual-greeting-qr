@@ -1,6 +1,7 @@
 # 挨拶を各国の言語に変えて返すアプリ。QRコードを読み込んだデバイスのブラウザ情報とIPアドレスからの読み込みへ対応
 # 起動コマンド　flask run --host=0.0.0.0 --port=5001
 # サーバーのバックグランドでの起動コマンド　nohup python app.py > output.log 2>&1 &
+# redis-serverでredisサーバーを起動
 
 # ngrokを使用する場合
 # 1. brew install ngrok
